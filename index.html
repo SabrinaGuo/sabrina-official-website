@@ -1097,6 +1097,55 @@
       line-height: 1.9;
     }
 
+    .about-cat-video {
+      margin-top: 30px;
+    }
+
+    .about-cat-video-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 11px;
+      color: var(--deep-blue-gray);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+    }
+
+    .about-cat-video-label i {
+      color: var(--sage);
+      font-size: .85rem;
+    }
+
+    .about-cat-video-frame {
+      position: relative;
+      overflow: hidden;
+      width: min(100%, 240px);
+      aspect-ratio: 9 / 16;
+      margin-inline: auto;
+      border: 1px solid rgba(132, 151, 170, .28);
+      border-radius: 20px;
+      background: var(--fog-blue);
+      box-shadow: 0 18px 38px rgba(83, 111, 144, .12);
+    }
+
+    .about-cat-video-frame iframe {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      display: block;
+      border: 0;
+    }
+
+    .about-cat-video-frame::after {
+      content: '';
+      position: absolute;
+      z-index: 2;
+      inset: 0;
+      cursor: default;
+    }
+
     .about-body>p {
       margin: 0 0 20px;
       color: #5e6b80;
@@ -1948,7 +1997,7 @@
     .contact-content {
       position: relative;
       z-index: 1;
-      max-width: 720px;
+      max-width: 820px;
     }
 
     .contact-content h2 {
@@ -1965,6 +2014,179 @@
       color: #69768c;
       font-size: .96rem;
       line-height: 2;
+    }
+
+    .contact-email {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-top: 21px;
+      color: var(--deep-blue-gray);
+      font-size: .9rem;
+      font-weight: 600;
+    }
+
+    .contact-email i {
+      color: var(--violet);
+    }
+
+    .contact-form {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 39px;
+      padding-top: 30px;
+      border-top: 1px solid rgba(132, 151, 170, .25);
+    }
+
+    .contact-form-heading {
+      grid-column: 1 / -1;
+      margin: 0 0 2px;
+      color: var(--graphite);
+      font-size: 1.15rem;
+      letter-spacing: -.025em;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .form-field.full-width,
+    .form-hint {
+      grid-column: 1 / -1;
+    }
+
+    .form-field label {
+      color: var(--deep-blue-gray);
+      font-size: .78rem;
+      font-weight: 700;
+    }
+
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      width: 100%;
+      border: 1px solid rgba(132, 151, 170, .34);
+      border-radius: 11px;
+      padding: 11px 13px;
+      color: var(--graphite);
+      background: rgba(255, 255, 255, .72);
+      font: inherit;
+      font-size: .86rem;
+      outline: 0;
+      transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+
+    .form-field textarea {
+      min-height: 118px;
+      resize: vertical;
+    }
+
+    .form-field input::placeholder,
+    .form-field textarea::placeholder {
+      color: #9aa8b6;
+    }
+
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus {
+      border-color: var(--deep-blue-gray);
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(132, 151, 170, .14);
+    }
+
+    .contact-form button {
+      justify-self: start;
+      border: 0;
+      cursor: pointer;
+    }
+
+    .form-hint {
+      margin: -5px 0 0;
+      color: var(--muted);
+      font-size: .72rem;
+      line-height: 1.7;
+    }
+
+    .form-success-modal {
+      position: fixed;
+      z-index: 400;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background: rgba(233, 237, 242, .52);
+      backdrop-filter: blur(9px);
+      -webkit-backdrop-filter: blur(9px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .25s ease, visibility .25s ease;
+    }
+
+    .form-success-modal.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .form-success-card {
+      width: min(100%, 420px);
+      padding: 34px 30px 30px;
+      border: 1px solid rgba(132, 151, 170, .28);
+      border-radius: 22px;
+      color: var(--graphite);
+      text-align: center;
+      background: rgba(247, 248, 250, .96);
+      box-shadow: 0 24px 60px rgba(48, 58, 70, .18);
+      transform: translateY(12px) scale(.97);
+      transition: transform .35s var(--ease-out);
+    }
+
+    .form-success-modal.is-open .form-success-card {
+      transform: translateY(0) scale(1);
+    }
+
+    .form-success-icon {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 17px;
+      border-radius: 50%;
+      color: var(--graphite);
+      background: var(--sage);
+      font-size: 1.15rem;
+    }
+
+    .form-success-card h3 {
+      margin: 0;
+      font-size: 1.25rem;
+    }
+
+    .form-success-card p {
+      margin: 10px 0 22px;
+      color: var(--deep-blue-gray);
+      font-size: .88rem;
+    }
+
+    .form-success-close {
+      border: 0;
+      cursor: pointer;
+    }
+
+    @media (max-width: 640px) {
+      .contact-form {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+
+      .contact-form-heading,
+      .form-field,
+      .form-field.full-width,
+      .form-hint {
+        grid-column: 1;
+      }
     }
 
     .contact-bottom {
@@ -2830,6 +3052,16 @@
             <h3>郭怡玲</h3>
             <p class="role">Frontend Engineer 前端工程師</p>
             <p class="statement">我在設計與工程之間搭起橋樑，讓好的想法不只被看見，也能被穩定地實現。</p>
+            <div class="about-cat-video">
+              <div class="about-cat-video-label"><i class="fa-solid fa-paw" aria-hidden="true"></i> ABOUT JIJI</div>
+              <div class="about-cat-video-frame">
+                <iframe
+                  src="https://www.youtube.com/embed/BIePG1YaNeY?autoplay=1&mute=1&loop=1&playlist=BIePG1YaNeY&controls=0&disablekb=1&fs=0&iv_load_policy=3&playsinline=1&rel=0&modestbranding=1"
+                  title="吉吉的生活影片"
+                  allow="autoplay; encrypted-media; picture-in-picture"
+                  allowfullscreen></iframe>
+              </div>
+            </div>
           </aside>
           <div class="about-body reveal reveal-delay-1">
             <p>擁有約 8–9 年前端開發經驗，目前任職於昕力資訊設計部，專注於網站互動體驗、前端系統開發與跨部門協作。</p>
@@ -3180,6 +3412,43 @@
             <div class="eyebrow">07 / CONTACT</div>
             <h2 id="contact-title">有個好點子？<br><span class="gradient-text">讓我們一起把它實現。</span></h2>
             <p>無論是品牌互動體驗、前端系統開發，或是需要在設計與技術之間找到更好的解法，都歡迎交流。</p>
+            <a class="contact-email" href="mailto:hsif0111@gmail.com"><i class="fa-solid fa-envelope" aria-hidden="true"></i>聯絡信箱：hsif0111@gmail.com</a>
+            <form class="contact-form" id="contact-form" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSe9t83qW7oZJof_bGM-jMk7xAknRmf7Qo6XFkI5Woi-Xr2ffg/formResponse" method="post" target="google-form-target">
+              <h3 class="contact-form-heading">與我們取得聯繫</h3>
+              <div class="form-field">
+                <label for="contact-name">您的姓名／稱呼</label>
+                <input id="contact-name" name="entry.588998168" type="text" placeholder="請輸入您的姓名或稱呼" autocomplete="name" required>
+              </div>
+              <div class="form-field">
+                <label for="contact-email">聯絡電子信箱</label>
+                <input id="contact-email" name="entry.476214014" type="email" placeholder="name@example.com" autocomplete="email" required>
+              </div>
+              <div class="form-field">
+                <label for="contact-type">您的需求</label>
+                <select id="contact-type" name="entry.1610329698" required>
+                  <option value="" disabled selected>請選擇需求類型</option>
+                  <option value="網站製作">網站製作</option>
+                  <option value="需求諮詢">需求諮詢</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label for="contact-time">適合聯絡的時間</label>
+                <select id="contact-time" name="entry.1091995575" required>
+                  <option value="" disabled selected>請選擇方便時段</option>
+                  <option value="平日上午 09:00–12:00">平日上午 09:00–12:00</option>
+                  <option value="平日下午 13:30–17:30">平日下午 13:30–17:30</option>
+                  <option value="平日晚間 19:00–21:00">平日晚間 19:00–21:00</option>
+                  <option value="週末白天">週末白天</option>
+                  <option value="請以 Email 聯繫">請以 Email 聯繫</option>
+                </select>
+              </div>
+              <div class="form-field full-width">
+                <label for="contact-message">需求簡介</label>
+                <textarea id="contact-message" name="entry.1646642689" placeholder="請簡單描述您的專案需求、預計時程或想討論的內容" required></textarea>
+              </div>
+              <p class="form-hint">送出後會留在本頁，資料將安全送至 Google 表單。</p>
+              <button class="button-primary" type="submit">送出聯絡需求 <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></button>
+            </form>
             <div class="contact-bottom">
               <div class="contact-links" aria-label="社群與需求表單連結">
                 <a class="contact-link line-link" href="https://line.me/ti/p/c658kD24mn" target="_blank"
@@ -3218,6 +3487,16 @@
     </div>
   </footer>
 
+  <iframe name="google-form-target" id="google-form-target" title="Google 表單背景送出" hidden></iframe>
+  <div class="form-success-modal" id="form-success-modal" role="dialog" aria-modal="true" aria-labelledby="form-success-title" aria-hidden="true">
+    <div class="form-success-card">
+      <div class="form-success-icon" aria-hidden="true"><i class="fa-solid fa-check"></i></div>
+      <h3 id="form-success-title">需求已送出</h3>
+      <p>我們將盡快與您聯絡！</p>
+      <button class="button-primary form-success-close" id="form-success-close" type="button">好的</button>
+    </div>
+  </div>
+
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-caption" aria-hidden="true">
     <div class="lightbox-content">
       <button class="lightbox-close" id="lightbox-close" type="button" aria-label="關閉圖片預覽">&times;</button>
@@ -3243,6 +3522,34 @@
       const typewriter = document.getElementById('typewriter');
       const heroTitle = document.getElementById('hero-title');
       const originalHeadline = '把想像寫成程式，把細節留給體驗。';
+      const contactForm = document.getElementById('contact-form');
+      const formSuccessModal = document.getElementById('form-success-modal');
+      const formSuccessClose = document.getElementById('form-success-close');
+
+      const closeFormSuccess = () => {
+        formSuccessModal.classList.remove('is-open');
+        formSuccessModal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        contactForm.querySelector('button[type="submit"]').disabled = false;
+      };
+
+      contactForm.addEventListener('submit', () => {
+        contactForm.querySelector('button[type="submit"]').disabled = true;
+        window.setTimeout(() => {
+          formSuccessModal.classList.add('is-open');
+          formSuccessModal.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden';
+          contactForm.reset();
+          formSuccessClose.focus();
+        }, 900);
+      });
+      formSuccessClose.addEventListener('click', closeFormSuccess);
+      formSuccessModal.addEventListener('click', (event) => {
+        if (event.target === formSuccessModal) closeFormSuccess();
+      });
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && formSuccessModal.classList.contains('is-open')) closeFormSuccess();
+      });
       const lightbox = document.getElementById('lightbox');
       const lightboxContent = document.querySelector('.lightbox-content');
       const lightboxImage = document.getElementById('lightbox-image');
