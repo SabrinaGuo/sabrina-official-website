@@ -5,8 +5,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#ffffff">
+  <meta name="author" content="郭怡玲 YI-LING KUO">
+  <meta name="robots" content="index, follow">
   <title>郭怡玲 YI-LING KUO｜Frontend Engineer</title>
   <meta name="description" content="郭怡玲的個人品牌網站。以設計思維理解需求，透過前端工程實現互動體驗、企業系統與可持續維護的數位產品。">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="郭怡玲 YI-LING KUO｜Frontend Engineer">
+  <meta name="twitter:description" content="把想像寫成程式，把細節留給體驗。串聯設計與技術，讓創意有效落地。">
   <meta property="og:type" content="website">
   <meta property="og:title" content="郭怡玲 YI-LING KUO｜Frontend Engineer">
   <meta property="og:description" content="把想像寫成程式，把細節留給體驗。串聯設計與技術，讓創意有效落地。">
@@ -15,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <script src="https://cdn.tailwindcss.com"></script>
@@ -27,10 +32,25 @@
             brand: { blue: '#536F90', violet: '#AAA0B9', mint: '#B7C6BE' },
             ink: '#303A46', muted: '#8497AA', mist: '#F7F8FA',
           },
-          fontFamily: { sans: ['Inter', 'Noto Sans TC', 'system-ui', 'sans-serif'] }
+          fontFamily: { sans: ['Noto Sans TC', 'Inter', 'system-ui', 'sans-serif'] }
         }
       }
     };
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "郭怡玲",
+      "alternateName": "YI-LING KUO",
+      "jobTitle": "Frontend Engineer",
+      "description": "專注於品牌互動體驗、前端系統開發與跨部門協作的前端工程師。",
+      "knowsAbout": ["Vue 3", "JavaScript", "UI/UX Collaboration", "RESTful API"],
+      "sameAs": [
+        "https://github.com/SabrinaGuo",
+        "https://line.me/ti/p/c658kD24mn"
+      ]
+    }
   </script>
   <style>
     :root {
@@ -64,7 +84,7 @@
       margin: 0;
       color: var(--ink);
       background: #fff;
-      font-family: Inter, 'Noto Sans TC', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-family: 'Noto Sans TC', Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
       line-height: 1.75;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
@@ -81,6 +101,28 @@
       text-decoration: none;
     }
 
+    :focus-visible {
+      outline: 3px solid rgba(83, 111, 144, .55);
+      outline-offset: 4px;
+    }
+
+    .skip-link {
+      position: fixed;
+      z-index: 200;
+      top: 12px;
+      left: 12px;
+      padding: 9px 14px;
+      border-radius: 9px;
+      color: #fff;
+      background: var(--graphite);
+      transform: translateY(-160%);
+      transition: transform .2s ease;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
     button {
       font: inherit;
     }
@@ -88,6 +130,151 @@
     img,
     svg {
       max-width: 100%;
+    }
+
+    .lightbox-image {
+      cursor: zoom-in;
+    }
+
+    .lightbox {
+      position: fixed;
+      z-index: 300;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: clamp(58px, 8vh, 86px) clamp(52px, 7vw, 110px);
+      background: rgba(233, 237, 242, .48);
+      backdrop-filter: blur(9px);
+      -webkit-backdrop-filter: blur(9px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .3s ease, visibility .3s ease;
+    }
+
+    .lightbox.is-open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .lightbox-content {
+      position: relative;
+      width: min(100%, 1080px);
+      height: min(100%, calc(100vh - 132px));
+      height: min(100%, calc(100dvh - 132px));
+      max-height: calc(100vh - 132px);
+      max-height: calc(100dvh - 132px);
+      display: grid;
+      place-items: center;
+      transform: translateY(18px) scale(.96);
+      transition: transform .4s var(--ease-out);
+    }
+
+    .lightbox.is-open .lightbox-content {
+      transform: translateY(0) scale(1);
+    }
+
+    .lightbox-content img {
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: calc(100vh - 132px);
+      max-height: calc(100dvh - 132px);
+      object-fit: contain;
+      border: 1px solid rgba(233, 237, 242, .75);
+      border-radius: 18px;
+      background: var(--fog-white);
+      box-shadow: 0 30px 80px rgba(20, 31, 46, .32);
+    }
+
+    .lightbox-close,
+    .lightbox-nav {
+      position: absolute;
+      z-index: 1;
+      display: grid;
+      place-items: center;
+      width: 43px;
+      height: 43px;
+      border: 1px solid rgba(233, 237, 242, .75);
+      border-radius: 50%;
+      color: var(--graphite);
+      background: rgba(247, 248, 250, .94);
+      cursor: pointer;
+      box-shadow: 0 8px 22px rgba(20, 31, 46, .16);
+      transition: transform .2s ease, background .2s ease;
+    }
+
+    .lightbox-close:hover,
+    .lightbox-nav:hover {
+      transform: translateY(-2px);
+      background: #fff;
+    }
+
+    .lightbox-close {
+      top: -18px;
+      right: -18px;
+      font-size: 1.25rem;
+    }
+
+    .lightbox-nav {
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1rem;
+    }
+
+    .lightbox-nav:hover {
+      transform: translateY(-50%) translateY(-2px);
+    }
+
+    .lightbox-prev {
+      left: -21px;
+    }
+
+    .lightbox-next {
+      right: -21px;
+    }
+
+    .lightbox-caption {
+      position: absolute;
+      right: 0;
+      bottom: -34px;
+      left: 0;
+      color: var(--graphite);
+      font-size: .78rem;
+      text-align: center;
+      letter-spacing: .04em;
+    }
+
+    @media (max-width: 700px) {
+      .lightbox {
+        padding: 62px 18px 54px;
+      }
+
+      .lightbox-content {
+        width: 100%;
+        height: min(100%, calc(100vh - 116px));
+        height: min(100%, calc(100dvh - 116px));
+        max-height: calc(100vh - 116px);
+        max-height: calc(100dvh - 116px);
+      }
+
+      .lightbox-content img {
+        max-height: calc(100vh - 116px);
+        max-height: calc(100dvh - 116px);
+        border-radius: 14px;
+      }
+
+      .lightbox-close {
+        top: -40px;
+        right: 0;
+      }
+
+      .lightbox-prev {
+        left: -7px;
+      }
+
+      .lightbox-next {
+        right: -7px;
+      }
     }
 
     ::selection {
@@ -255,6 +442,8 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      flex: 0 0 auto;
+      white-space: nowrap;
       padding: 10px 15px;
       border: 1px solid #dce4f4;
       border-radius: 999px;
@@ -270,6 +459,12 @@
       border-color: #a7f3d0;
       background: #f0fdf8;
       box-shadow: 0 7px 22px rgba(16, 185, 129, .10);
+    }
+
+    .nav-contact svg {
+      flex: 0 0 auto;
+      width: 16px;
+      height: 16px;
     }
 
     .menu-toggle {
@@ -869,6 +1064,18 @@
       box-shadow: 0 15px 35px rgba(76, 97, 192, .16);
     }
 
+    .about-portrait {
+      width: 132px;
+      height: 132px;
+      display: block;
+      margin-bottom: 23px;
+      border: 6px solid rgba(255, 255, 255, .88);
+      border-radius: 38px;
+      object-fit: cover;
+      box-shadow: 0 18px 38px rgba(83, 111, 144, .16);
+      transform: rotate(-2deg);
+    }
+
     .about-aside h3 {
       margin: 0;
       font-size: 1.45rem;
@@ -1215,6 +1422,76 @@
       overflow: hidden;
       padding: 25px;
       background: linear-gradient(145deg, #edf4ff, #f5f3ff);
+    }
+
+    .work-image {
+      position: relative;
+      z-index: 1;
+      width: min(100%, 395px);
+      height: 175px;
+      border: 1px solid rgba(196, 207, 229, .92);
+      border-radius: 14px;
+      object-fit: cover;
+      box-shadow: 0 18px 30px rgba(56, 76, 135, .13);
+    }
+
+    .work-image + .mini-browser {
+      display: none;
+    }
+
+    .project-archive {
+      margin-top: 43px;
+      padding-top: 28px;
+      border-top: 1px solid var(--line);
+    }
+
+    .project-archive-title {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 20px;
+      color: var(--graphite);
+      font-size: .85rem;
+      font-weight: 700;
+    }
+
+    .project-archive-title span {
+      color: var(--muted);
+      font-size: .72rem;
+      font-weight: 500;
+    }
+
+    .project-archive-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 17px;
+    }
+
+    .project-archive figure {
+      margin: 0;
+    }
+
+    .project-archive img {
+      width: 100%;
+      aspect-ratio: 1;
+      display: block;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      object-fit: cover;
+      background: var(--fog-violet);
+      transition: transform .3s var(--ease-out), box-shadow .3s;
+    }
+
+    .project-archive img:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 25px rgba(83, 111, 144, .14);
+    }
+
+    .project-archive figcaption {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: .7rem;
     }
 
     .work-card:nth-child(2) .work-visual {
@@ -2308,6 +2585,10 @@
         margin-top: 33px;
       }
 
+      .project-archive-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
       .work-visual {
         min-height: 218px;
         padding: 20px;
@@ -2434,6 +2715,7 @@
 </head>
 
 <body id="top">
+  <a class="skip-link" href="#main-content">跳至主要內容</a>
   <!-- 固定導覽列：桌面導覽與手機選單共用同一組錨點 -->
   <header class="topbar" id="site-header">
     <div class="container-wide nav-inner">
@@ -2465,7 +2747,7 @@
     </div>
   </header>
 
-  <main>
+  <main id="main-content">
     <!-- 01 Hero：以「設計 × 工程」作為品牌核心視覺 -->
     <section class="hero" aria-labelledby="hero-title">
       <div class="container-wide hero-grid">
@@ -2489,7 +2771,7 @@
           </div>
           <div class="hero-facts" aria-label="專業摘要">
             <div class="hero-fact"><strong>8–9 年</strong><span>前端開發經驗</span></div>
-            <div class="hero-fact"><strong>Vue 3 · React</strong><span>前端技術實務</span></div>
+            <div class="hero-fact"><strong>Vue 3 · JavaScript</strong><span>前端技術實務</span></div>
             <div class="hero-fact"><strong>UI/UX</strong><span>跨部門協作</span></div>
           </div>
         </div>
@@ -2544,7 +2826,7 @@
         <h2 class="section-heading" id="about-title">讓設計不只停留在畫面，<br><span class="gradient-text">讓技術真正回應需求。</span></h2>
         <div class="about-layout">
           <aside class="about-aside reveal">
-            <div class="about-monogram" aria-hidden="true">YL</div>
+            <img class="about-portrait lightbox-image" src="作品集/me.jpeg" alt="郭怡玲的個人形象插畫" tabindex="0" role="button">
             <h3>郭怡玲</h3>
             <p class="role">Frontend Engineer 前端工程師</p>
             <p class="statement">我在設計與工程之間搭起橋樑，讓好的想法不只被看見，也能被穩定地實現。</p>
@@ -2561,12 +2843,12 @@
               <article class="expertise-row">
                 <span class="expertise-no">02</span>
                 <h4>兼顧擴充與維護的前端架構</h4>
-                <p>熟悉 Vue 3、React、JavaScript、HTML5 與 SCSS；重視模組化、共用元件、Props／Emit 與狀態管理思維。</p>
+                <p>熟悉 Vue 3、JavaScript、HTML5 與 SCSS；重視模組化、共用元件、Props／Emit 與狀態管理思維。</p>
               </article>
               <article class="expertise-row">
                 <span class="expertise-no">03</span>
                 <h4>跨產業的專案實戰經驗</h4>
-                <p>參與金融、航空、人壽及零售等產業專案，涵蓋品牌互動網站、心理測驗式招募體驗、AICOM 雲端 SaaS 與企業後台系統。</p>
+                <p>參與金融、航空、人壽及零售等產業專案，涵蓋品牌互動網站、心理測驗式招募體驗、雲端 SaaS 與企業後台系統。</p>
               </article>
               <article class="expertise-row">
                 <span class="expertise-no">04</span>
@@ -2662,6 +2944,7 @@
           <article class="work-card reveal">
             <div class="work-visual" aria-hidden="true">
               <div class="visual-grid"></div>
+              <img class="work-image lightbox-image" src="作品集/work.jpeg" alt="品牌互動專案視覺展示" loading="lazy" tabindex="0" role="button">
               <div class="mini-browser">
                 <div class="mini-browser-top"><i></i><i></i><i></i></div>
                 <div class="mini-screen">
@@ -2691,6 +2974,7 @@
           <article class="work-card reveal reveal-delay-1">
             <div class="work-visual" aria-hidden="true">
               <div class="visual-grid"></div>
+              <img class="work-image lightbox-image" src="作品集/work2.jpeg" alt="互動招募專案視覺展示" loading="lazy" tabindex="0" role="button">
               <div class="mini-browser">
                 <div class="mini-browser-top"><i></i><i></i><i></i></div>
                 <div class="mini-screen">
@@ -2717,6 +3001,7 @@
           <article class="work-card reveal">
             <div class="work-visual" aria-hidden="true">
               <div class="visual-grid"></div>
+              <img class="work-image lightbox-image" src="作品集/magic.jpeg" alt="雲端產品專案視覺展示" loading="lazy" tabindex="0" role="button">
               <div class="mini-browser">
                 <div class="mini-browser-top"><i></i><i></i><i></i></div>
                 <div class="mini-screen">
@@ -2733,8 +3018,8 @@
               </div><span class="visual-caption">EXPERIENCE / 03</span>
             </div>
             <div class="work-content">
-              <div class="work-meta"><span class="work-type">雲端 SaaS</span><span>AICOM</span></div>
-              <h3>AICOM 雲端 SaaS 產品</h3>
+              <div class="work-meta"><span class="work-type">雲端 SaaS</span><span>雲端產品</span></div>
+              <h3>雲端 SaaS 產品</h3>
               <p>參與產品介面與系統功能開發，運用 Vue 3 與共用元件思維，搭配 API 串接支援產品功能與後續擴充。</p>
               <div class="work-details">
                 <div><span class="work-detail-label">參與重點</span><span class="work-detail-text">Vue 3、共用元件、API 串接</span>
@@ -2747,6 +3032,7 @@
           <article class="work-card reveal reveal-delay-1">
             <div class="work-visual" aria-hidden="true">
               <div class="visual-grid"></div>
+              <img class="work-image lightbox-image" src="作品集/play.jpeg" alt="企業系統專案視覺展示" loading="lazy" tabindex="0" role="button">
               <div class="mini-browser">
                 <div class="mini-browser-top"><i></i><i></i><i></i></div>
                 <div class="mini-screen">
@@ -2777,6 +3063,15 @@
           </article>
         </div>
         <p class="work-privacy">註：作品區為經驗摘要與介面示意，並非實際專案截圖。若需公開投遞或正式對外使用，可再補上已取得授權的畫面、實際專案名稱、個人負責範圍及可驗證成果。</p>
+        <div class="project-archive" aria-labelledby="project-archive-title">
+          <div class="project-archive-title" id="project-archive-title">PROJECT VISUAL ARCHIVE <span>專案視覺素材展演</span></div>
+          <div class="project-archive-grid">
+            <figure><img class="lightbox-image" src="作品集/friend.jpeg" alt="專案視覺素材：角色互動插畫" loading="lazy" tabindex="0" role="button"><figcaption>Interactive Character</figcaption></figure>
+            <figure><img class="lightbox-image" src="作品集/chris.jpeg" alt="專案視覺素材：品牌角色插畫" loading="lazy" tabindex="0" role="button"><figcaption>Brand Illustration</figcaption></figure>
+            <figure><img class="lightbox-image" src="作品集/eat.jpeg" alt="專案視覺素材：活動情境插畫" loading="lazy" tabindex="0" role="button"><figcaption>Campaign Experience</figcaption></figure>
+            <figure><img class="lightbox-image" src="作品集/food.jpeg" alt="專案視覺素材：內容體驗插畫" loading="lazy" tabindex="0" role="button"><figcaption>Content Experience</figcaption></figure>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -2794,7 +3089,7 @@
             <div class="stack-group">
               <h3>Frontend Development</h3>
               <div class="stack-tags"><span>Vue
-                  3</span><span>React</span><span>JavaScript</span><span>HTML5</span><span>SCSS</span><span>Tailwind
+                  3</span><span>JavaScript</span><span>HTML5</span><span>SCSS</span><span>Tailwind
                   CSS</span></div>
             </div>
             <div class="stack-group">
@@ -2923,6 +3218,20 @@
     </div>
   </footer>
 
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-caption" aria-hidden="true">
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightbox-close" type="button" aria-label="關閉圖片預覽">&times;</button>
+      <button class="lightbox-nav lightbox-prev" id="lightbox-prev" type="button" aria-label="上一張圖片">
+        <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+      </button>
+      <img id="lightbox-image" src="" alt="">
+      <button class="lightbox-nav lightbox-next" id="lightbox-next" type="button" aria-label="下一張圖片">
+        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+      </button>
+      <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+  </div>
+
   <script>
     (() => {
       'use strict';
@@ -2934,6 +3243,69 @@
       const typewriter = document.getElementById('typewriter');
       const heroTitle = document.getElementById('hero-title');
       const originalHeadline = '把想像寫成程式，把細節留給體驗。';
+      const lightbox = document.getElementById('lightbox');
+      const lightboxContent = document.querySelector('.lightbox-content');
+      const lightboxImage = document.getElementById('lightbox-image');
+      const lightboxCaption = document.getElementById('lightbox-caption');
+      const lightboxClose = document.getElementById('lightbox-close');
+      const lightboxPrev = document.getElementById('lightbox-prev');
+      const lightboxNext = document.getElementById('lightbox-next');
+      const galleryImages = Array.from(document.querySelectorAll('.lightbox-image'));
+      let activeImageIndex = 0;
+      let lastFocusedElement = null;
+
+      const updateLightboxImage = () => {
+        const image = galleryImages[activeImageIndex];
+        lightboxImage.src = image.src;
+        lightboxImage.alt = image.alt;
+        lightboxCaption.textContent = `${activeImageIndex + 1} / ${galleryImages.length}  ·  ${image.alt}`;
+      };
+
+      const closeLightbox = () => {
+        lightbox.classList.remove('is-open');
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        if (lastFocusedElement) lastFocusedElement.focus();
+      };
+
+      const openLightbox = (index) => {
+        activeImageIndex = index;
+        lastFocusedElement = document.activeElement;
+        updateLightboxImage();
+        lightbox.classList.add('is-open');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        lightboxClose.focus();
+      };
+
+      galleryImages.forEach((image, index) => {
+        image.addEventListener('click', () => openLightbox(index));
+        image.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            openLightbox(index);
+          }
+        });
+      });
+
+      lightboxClose.addEventListener('click', closeLightbox);
+      lightboxPrev.addEventListener('click', () => {
+        activeImageIndex = (activeImageIndex - 1 + galleryImages.length) % galleryImages.length;
+        updateLightboxImage();
+      });
+      lightboxNext.addEventListener('click', () => {
+        activeImageIndex = (activeImageIndex + 1) % galleryImages.length;
+        updateLightboxImage();
+      });
+      lightbox.addEventListener('click', (event) => {
+        if (event.target === lightbox || event.target === lightboxContent) closeLightbox();
+      });
+      document.addEventListener('keydown', (event) => {
+        if (!lightbox.classList.contains('is-open')) return;
+        if (event.key === 'Escape') closeLightbox();
+        if (event.key === 'ArrowLeft') lightboxPrev.click();
+        if (event.key === 'ArrowRight') lightboxNext.click();
+      });
 
       // 只有腳本成功執行後才啟用進場隱藏樣式，避免 JavaScript 失效時看不到內容。
       document.body.classList.add('js-motion');
